@@ -1,7 +1,7 @@
 var assert = require('assert');
 var readBill = require('../lib/readBill');
 var providerBill = require('../lib/providerBill');
-
+var providerCalls = require('../lib/providerCalls');
 describe("readBill", function(){
   it('should take in a bill csv file and return a mapped bill object', function(){
     var result = readBill.readBill();
@@ -196,5 +196,11 @@ it('should return all bill items of a specific provider', function(){
     number: '0841257809',
     duration: '00h02m04s' } ]
 );
+});
+});
+describe("providerCalls", function(){
+it('should return number of calls with a specific provider', function(){
+  var result = providerCalls.providerCalls(providerBill.providerBill("CellC"));
+  assert.equal(result, 11);
 });
 });
