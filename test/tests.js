@@ -2,6 +2,9 @@ var assert = require('assert');
 var readBill = require('../lib/readBill');
 var providerBill = require('../lib/providerBill');
 var providerCalls = require('../lib/providerCalls');
+var durationInSeconds = require('../lib/durationInSeconds');
+var orderList = require('../lib/orderList');
+
 describe("readBill", function(){
   it('should take in a bill csv file and return a mapped bill object', function(){
     var result = readBill.readBill();
@@ -203,4 +206,60 @@ it('should return number of calls with a specific provider', function(){
   var result = providerCalls.providerCalls(providerBill.providerBill("CellC"));
   assert.equal(result, 11);
 });
+});
+describe('durationInSeconds', function(){
+  it('should take the current time format and return the number of seconds', function(){
+    var result = durationInSeconds.durationInSeconds("00h01m30s");
+    assert.equal(result, 90);
+  });
+});
+describe('orderList', function(){
+  it('should return the order of a bill passed into it as ascending by duration', function(){
+    var result = orderList.orderList(providerBill.providerBill('CellC'));
+    assert.deepEqual(result, [ { date: '12/10/2015',
+    provider: 'CellC',
+    number: '0825605600',
+    duration: 94 },
+  { date: '10/10/2015',
+    provider: 'CellC',
+    number: '0825605600',
+    duration: 100 },
+  { date: '24/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 124 },
+  { date: '03/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 154 },
+  { date: '07/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 184 },
+  { date: '15/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 184 },
+  { date: '06/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 334 },
+  { date: '21/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 334 },
+  { date: '23/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 394 },
+  { date: '14/10/2015',
+    provider: 'CellC',
+    number: '0841257809',
+    duration: 394 },
+  { date: '16/10/2015',
+    provider: 'CellC',
+    number: '0845009087',
+    duration: 551 } ]
+);
+  });
 });
