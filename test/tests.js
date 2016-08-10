@@ -4,6 +4,7 @@ var providerBill = require('../lib/providerBill');
 var providerCalls = require('../lib/providerCalls');
 var durationInSeconds = require('../lib/durationInSeconds');
 var orderList = require('../lib/orderList');
+var providerDurations = require('../lib/providerDurations');
 
 describe("readBill", function(){
   it('should take in a bill csv file and return a mapped bill object', function(){
@@ -260,6 +261,15 @@ describe('orderList', function(){
     provider: 'CellC',
     number: '0845009087',
     duration: 551 } ]
+);
+  });
+});
+describe('providerDurations',function(){
+  it('should return the total duration for each provider', function(){
+    var result = providerDurations.providerDurations(readBill.readBill());
+    assert.deepEqual(result, [ { provider: 'MTN', duration: 3471 },
+  { provider: 'CellC', duration: 2847 },
+  { provider: 'Vodacom', duration: 610 } ]
 );
   });
 });

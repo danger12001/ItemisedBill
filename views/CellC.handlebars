@@ -1,0 +1,15 @@
+
+<h1>Cell C Itemised Bill:</h1>
+<ul class="row">
+
+  <li class="col s4">DATE</li>
+  <li class="col s4">NUMBER</li>
+  <li class="col s4">DURATION</li>
+  {{#bill}}
+<li class="col s4">{{date}}</li>
+<li class="col s4">{{number}}</li>
+<li class="col s4">{{duration}}</li>
+{{/bill}}
+<li class="col s12 center ">Total Duration: {{total}} Seconds</li>
+
+</ul>
